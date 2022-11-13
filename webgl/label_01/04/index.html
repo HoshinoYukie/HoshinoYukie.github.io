@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绘制一个颜色不同的三角形和正方形</title>
+		<!-- 顶点着色器和片元着色器代码 -->
+		<script id="vertex-shader" type="x-shader/x-vertex">
+			attribute vec4 vPosition;
+            varying vec4 pos;
+		
+			void main(){
+				gl_Position = vPosition;
+                pos = vPosition;
+			}
+		</script>
+		<script id="fragment-shader" type="x-shader/x-fragment">
+			precision mediump float;
+			varying vec4 fColor;
+            varying vec4 pos;
+
+			void main(){
+                if(pos.x > 0.0){
+                    gl_FragColor = vec4( 0.0, 1.0, 0.0, 1.0 );
+                }
+                else{
+                    gl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 );
+                }
+			}
+		</script>
+		<!-- 一组相关的JS库 -->
+		<script type="text/javascript" src="../js/webgl-utils.js"></script>
+		<script type="text/javascript" src="../js/initShaders.js"></script>
+		<!-- 绘制三角形的JS代码 -->
+		<script type="text/javascript" src="js/triangle.js"></script>
+</head>
+<body>
+    <canvas id="triangle-canvas" style="border:none;" width="500" height="500"></canvas>
+</body>
+</html>
