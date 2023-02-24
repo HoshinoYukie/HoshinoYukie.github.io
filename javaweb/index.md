@@ -4,14 +4,28 @@
 
    + JSP 动作元素
 
-     以 `jsp` 为前缀
+     以`jsp`为前缀
+
+     ```JSP
+     <jsp:include page="filename"/>
+     <jsp:forward page="filename"/>
+     <jsp:include page="filename">
+     <%-- <jsp:forward page="filename"> --%>
+         <jsp:param name="" value="">
+     </jsp:include>
+     <jsp:useBean name="" class="" scope=""/>
+     <jsp:getProperty name="" property=""/>
+     <jsp:setProperty name="" property="" value=""/>
+     ```
 
    + JSP 脚本元素
 
-     `<%@ 指令名 属性1=“属性值1” ……%>`
+     `````html
+     <%@ 指令名 属性1=“属性值1” ……%>
+     `````
 
      + page 指令：定义网页的全局属性，仅 import 可使用多次
-     + include 指令：将其他文件插入JSP网页
+     + include 指令：将其他文件插入 JSP 网页
      + taglib 指令
 
    + JSP 基本元素
@@ -23,6 +37,10 @@
    + include 指令 与 include 动作
 
      **include 动作** 是动态包含，可以传递参数
+
+   + 变量作用域
+     - <% … %> 内定义的变量是局部变量，只能在该程序片中使用。
+     - <%! … %> 内定义的变量是实例变量，可以在整个 JSP 文件中使用。
 
 2. JSP 内置对象
 
@@ -44,7 +62,9 @@
 
 3. 实现页面跳转
 
-   +  `<jsp:forward page=""/>` 
+   + ````jsp
+     <jsp:forward page=""/> 
+     ````
 
    +  ```java
       //获取请求转发对象
@@ -61,7 +81,7 @@
 
    + 作用：访问用户数据，记录客户的连接信息
    + 生命周期：打开网页访问 JSP 网页到关闭浏览器或被销毁
-   + 有效期：15分钟
+   + 有效期：30分钟
 
 5. session 与 application
 
@@ -73,7 +93,7 @@
 
 ##  JavaBean 技术
 
-1. JSP中引入 JavaBean 的优点。
+1. JSP 中引入 JavaBean 的优点。
 
    1. 减少重复代码，使代码更加简洁；
 
@@ -102,18 +122,20 @@
 
       scope 范围：page,request,session,application
 
+      默认为 page
+   
    2. getProperty: 获取JavaBean对象中的值 
    
       ````JSP
       <jsp:getProperty name="对象名" property="属性名"/>
       ````
-
+   
    3. setProperty: 设置JavaBean对象值 
    
       ```jsp
       <jsp:setProperty name="对象名" property="属性名" value="属性值"/>
       ```
-
+   
       或 
    
       ```jsp
@@ -183,19 +205,45 @@
 
    + request 
 
-     1. 数据的获取 `request.getParameter("参数变量名")`
-     2. 数据的形成和保存 `request.setParameter("属性名",对象类型的属性值)`  
-     3. 数据的删除 `request.removeAttribute("属性名")` 
+     1. 数据的获取 
+   
+        `````java
+        request.getParameter("参数变量名")
+        `````
 
+     2. 数据的形成和保存 
+
+        ````java
+        request.setParameter("属性名",对象类型的属性值)
+        ````
+
+     3. 数据的删除 
+
+        ````java
+        request.removeAttribute("属性名")
+        ````
+   
    + session
-
+   
      需要先获取 HttpSession 的实例对象
-
-     1. 数据的获取 `session.getAttribute("参数变量名")`
-
-     2. 数据的形成和保存 `session.setAttribute("属性名",对象类型的属性值)`  
-
-     3. 数据的删除 `session.removeAttribute("属性名")` 
-
+   
+     1. 数据的获取 
+   
+        ````java
+        session.getAttribute("参数变量名")
+        ````
+   
+     2. 数据的形成和保存 
+     
+        `````java
+        session.setAttribute("属性名",对象类型的属性值)
+        `````
+     
+     3. 数据的删除 
+     
+        `````java
+        session.removeAttribute("属性名")
+        `````
+     
         
 
